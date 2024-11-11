@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const App = () => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0); // Time in milliseconds
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -9,8 +9,8 @@ const App = () => {
 
     if (isRunning) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
-      }, 1000);
+        setTime((prevTime) => prevTime + 10); // Increment by 10ms
+      }, 10);
     } else if (!isRunning && time !== 0) {
       clearInterval(interval);
     }
@@ -19,12 +19,14 @@ const App = () => {
   }, [isRunning, time]);
 
   const formatTime = (time) => {
-    const getSeconds = `0${time % 60}`.slice(-2);
-    const minutes = `${Math.floor(time / 60)}`;
+    const getMilliseconds = `0${Math.floor((time % 1000) / 10)}`.slice(-2);
+    const seconds = Math.floor(time / 1000);
+    const getSeconds = `0${seconds % 60}`.slice(-2);
+    const minutes = Math.floor(time / 60000);
     const getMinutes = `0${minutes % 60}`.slice(-2);
-    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+    const getHours = `0${Math.floor(time / 3600000)}`.slice(-2);
 
-    return `${getHours} : ${getMinutes} : ${getSeconds}`;
+    return `${getHours} : ${getMinutes} : ${getSeconds} : ${getMilliseconds}`;
   };
 
   return (
