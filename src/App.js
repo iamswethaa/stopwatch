@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const App = () => {
   const [time, setTime] = useState(0); // Time in milliseconds
   const [isRunning, setIsRunning] = useState(false);
+  const [laps, setLaps] = useState([]); // Store laps
 
   useEffect(() => {
     let interval = null;
@@ -29,6 +30,18 @@ const App = () => {
     return `${getHours} : ${getMinutes} : ${getSeconds} : ${getMilliseconds}`;
   };
 
+  const handleLap = () => {
+    if (isRunning) {
+      setLaps((prevLaps) => [...prevLaps, time]);
+    }
+  };
+
+  const handleReset = () => {
+    setTime(0);
+    setIsRunning(false);
+    setLaps([]); // Clear all laps
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
       <h1 className="text-3xl font-bold mb-4">Stopwatch</h1>
@@ -48,14 +61,34 @@ const App = () => {
           Stop
         </button>
         <button
-          onClick={() => {
-            setTime(0);
-            setIsRunning(false);
-          }}
+          onClick={handleReset}
           className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
         >
           Reset
         </button>
+        <button
+          onClick={handleLap}
+          className="bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-600"
+          disabled={!isRunning}
+        >
+          Lap
+        </button>
+      </div>
+
+      {/* Lap times display */}
+      <div className="mt-8 w-3/4 max-w-md">
+        <h2 className="text-2xl mb-4">Laps</h2>
+        <ul className="space-y-2">
+          {laps.map((lap, index) => (
+            <li
+              key={index}
+              className="flex justify-between bg-gray-700 p-2 rounded"
+            >
+              <span>Lap {index + 1}</span>
+              <span>{formatTime(lap)}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
