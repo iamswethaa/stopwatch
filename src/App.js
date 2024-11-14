@@ -43,9 +43,9 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
+    <div className="flex flex-col items-center min-h-screen bg-gray-900 text-white py-8">
       <h1 className="text-3xl font-bold mb-4">Stopwatch</h1>
-      
+
       {/* Centered Stopwatch Display */}
       <div className="flex flex-col items-center">
         <div className="text-5xl font-mono mb-8">{formatTime(time)}</div>
@@ -79,8 +79,8 @@ const App = () => {
         </div>
       </div>
 
-      {/* Lap times display with fixed height and scroll */}
-      <div className="mt-8 w-3/4 max-w-md h-64 overflow-y-auto border-t border-gray-600">
+      {/* Lap times display */}
+      <div className="mt-8 w-3/4 max-w-md border-t border-gray-600 pt-4">
         <h2 className="text-2xl mb-4 text-center">Laps</h2>
         <ul className="space-y-2">
           {laps.map((lap, index) => (
