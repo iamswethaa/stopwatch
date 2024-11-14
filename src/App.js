@@ -43,41 +43,45 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white">
       <h1 className="text-3xl font-bold mb-4">Stopwatch</h1>
-      <div className="text-5xl font-mono">{formatTime(time)}</div>
-      <div className="flex space-x-4 mt-8">
-        <button
-          onClick={() => setIsRunning(true)}
-          className="bg-green-500 px-4 py-2 rounded hover:bg-green-600"
-          disabled={isRunning}
-        >
-          Start
-        </button>
-        <button
-          onClick={() => setIsRunning(false)}
-          className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
-        >
-          Stop
-        </button>
-        <button
-          onClick={handleReset}
-          className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Reset
-        </button>
-        <button
-          onClick={handleLap}
-          className="bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-600"
-          disabled={!isRunning}
-        >
-          Lap
-        </button>
+      
+      {/* Centered Stopwatch Display */}
+      <div className="flex flex-col items-center">
+        <div className="text-5xl font-mono mb-8">{formatTime(time)}</div>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setIsRunning(true)}
+            className="bg-green-500 px-4 py-2 rounded hover:bg-green-600"
+            disabled={isRunning}
+          >
+            Start
+          </button>
+          <button
+            onClick={() => setIsRunning(false)}
+            className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
+          >
+            Stop
+          </button>
+          <button
+            onClick={handleReset}
+            className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Reset
+          </button>
+          <button
+            onClick={handleLap}
+            className="bg-yellow-500 px-4 py-2 rounded hover:bg-yellow-600"
+            disabled={!isRunning}
+          >
+            Lap
+          </button>
+        </div>
       </div>
 
-      {/* Lap times display */}
-      <div className="mt-8 w-3/4 max-w-md">
-        <h2 className="text-2xl mb-4">Laps</h2>
+      {/* Lap times display with fixed height and scroll */}
+      <div className="mt-8 w-3/4 max-w-md h-64 overflow-y-auto border-t border-gray-600">
+        <h2 className="text-2xl mb-4 text-center">Laps</h2>
         <ul className="space-y-2">
           {laps.map((lap, index) => (
             <li
