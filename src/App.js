@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 const App = () => {
-  const [time, setTime] = useState(0); // Time in milliseconds
+  const [time, setTime] = useState(0); 
   const [isRunning, setIsRunning] = useState(false);
-  const [laps, setLaps] = useState([]); // Store laps
+  const [laps, setLaps] = useState([]);
 
   useEffect(() => {
     let interval = null;
 
     if (isRunning) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10); // Increment by 10ms
+        setTime((prevTime) => prevTime + 10); 
       }, 10);
     } else if (!isRunning && time !== 0) {
       clearInterval(interval);
@@ -30,6 +30,7 @@ const App = () => {
     return `${getHours} : ${getMinutes} : ${getSeconds} : ${getMilliseconds}`;
   };
 
+
   const handleLap = () => {
     if (isRunning) {
       setLaps((prevLaps) => [...prevLaps, time]);
@@ -39,7 +40,7 @@ const App = () => {
   const handleReset = () => {
     setTime(0);
     setIsRunning(false);
-    setLaps([]); // Clear all laps
+    setLaps([]); 
   };
 
   return (
